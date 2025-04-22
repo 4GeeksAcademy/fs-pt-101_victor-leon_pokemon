@@ -1,23 +1,21 @@
 // File: src/pages/Favorites.jsx
 import React from 'react'
-import { useFavorites } from '../context/FavoritesContext'
 import EntityCard from '../components/EntityCard'
+import useGlobalReducer from '../hooks/useGlobalReducer'
 
 export default function Favorites() {
-  const { favorites } = useFavorites()
+  const { store } = useGlobalReducer()
+  const favs = store.favorites
 
-  if (!favorites.length) return <p className="mt-4">No favorites yet.</p>
+  if (!favs.length) return <p className="text-center mt-4">Sin favoritos</p>
 
   return (
-    <>
-      <h2 className="mt-4">Favorites</h2>
-      <div className="row">
-        {favorites.map(item => (
-          <div key={item.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-            <EntityCard item={item} />
-          </div>
-        ))}
-      </div>
-    </>
+    <div className="row g-3">
+      {favs.map(item => (
+        <div key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
+          <EntityCard item={item} />
+        </div>
+      ))}
+    </div>
   )
 }
