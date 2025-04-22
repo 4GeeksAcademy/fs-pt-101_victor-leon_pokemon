@@ -1,26 +1,45 @@
 /* File: src/index.css */
-/* Bootstrap 5.3.5 desde CDN */
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css');
 
 body {
-  background: linear-gradient(135deg, #3b4cca 0%, #ffcb05 100%);
-  color: #fff;
+  background: #eef2f5;
+  color: #333;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  min-height: 100vh;
 }
-.container { padding: 2rem 1rem; }
+.container { padding: 2rem; }
+.navbar { background: #fff; border-bottom: 2px solid #ffcb05; }
 .card {
-  background: rgba(0,0,0,0.75);
-  border: 2px solid #ffcb05;
+  background: #fff;
+  border: none;
   border-radius: 1rem;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,0.5);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
   transition: transform .2s;
+  cursor: pointer;
 }
-.card:hover { transform: scale(1.03); }
-.card-img-top { background: #fff; padding: 1rem; }
-.btn-primary { background: #3b4cca; border-color: #3b4cca; }
-.btn-primary:hover { background: #2a36a3; border-color: #2a36a3; }
-.btn-outline-success { color: #3b4cca; border-color: #3b4cca; }
-.btn-outline-success:hover { background: #3b4cca; color: #fff; }
-.spinner-border { color: #ffcb05; }
+.card:hover { transform: translateY(-5px); }
+.card-img-top {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.btn-primary {
+  background: #3b4cca;
+  border-color: #3b4cca;
+}
+.btn-primary:hover {
+  background: #2a36a3;
+  border-color: #2a36a3;
+}
+.btn-outline-success {
+  color: #3b4cca;
+  border-color: #3b4cca;
+}
+.btn-outline-success:hover {
+  background: #3b4cca;
+  color: #fff;
+}
+.dropdown-menu { max-height: 250px; overflow-y: auto; }
+.progress-bar { transition: width .5s; }
+.badge-type { background-color: #3b4cca; color: #fff; margin-right: .5rem; }

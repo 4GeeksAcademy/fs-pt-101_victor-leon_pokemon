@@ -10,11 +10,9 @@ export default function Favorites() {
   if (!favs.length) return <p className="text-center mt-4">Sin favoritos</p>
 
   return (
-    <div className="row g-3">
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
       {favs.map(item => (
-        <div key={item.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
-          <EntityCard item={item} />
-        </div>
+        <EntityCard key={item.id} item={item} />
       ))}
     </div>
   )

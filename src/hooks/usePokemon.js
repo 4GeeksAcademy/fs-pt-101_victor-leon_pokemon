@@ -2,8 +2,5 @@
 import { useAsync } from './useAsync'
 import { fetchList, fetchDetail } from '../api/pokemon'
 
-export const usePokemonList = limit =>
-  useAsync(() => fetchList(limit), [limit])
-
-export const usePokemonDetail = id =>
-  useAsync(() => fetchDetail(id), [id])
+export const usePokemonList = () => useAsync(() => fetchList(), [])
+export const usePokemonDetail = id => useAsync(() => fetchDetail(id), [id])

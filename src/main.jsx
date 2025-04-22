@@ -6,12 +6,11 @@ import { RouterProvider } from 'react-router-dom'
 import { router } from './routes'
 import { StoreProvider } from './hooks/useGlobalReducer'
 
-const Main = () => (
+const root = document.getElementById('root')
+ReactDOM.createRoot(root).render(
   <React.StrictMode>
     <StoreProvider>
       <RouterProvider router={router} />
     </StoreProvider>
   </React.StrictMode>
 )
-
-ReactDOM.createRoot(document.getElementById('root')).render(<Main />)

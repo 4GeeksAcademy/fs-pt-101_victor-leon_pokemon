@@ -1,7 +1,7 @@
 // File: src/hooks/useAsync.js
 import { useState, useEffect, useRef } from 'react'
 
-export function useAsync(fn, deps = []) {
+export function useAsync(asyncFn, deps = []) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -10,7 +10,7 @@ export function useAsync(fn, deps = []) {
   useEffect(() => {
     cancel.current = false
     setLoading(true)
-    fn()
+    asyncFn()
       .then(res => !cancel.current && setData(res))
       .catch(err => !cancel.current && setError(err.message))
       .finally(() => !cancel.current && setLoading(false))
