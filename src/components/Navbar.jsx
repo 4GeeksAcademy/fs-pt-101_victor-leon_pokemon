@@ -1,19 +1,22 @@
-import { Link } from "react-router-dom";
+// File: src/components/Navbar.jsx
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useFavorites } from '../context/FavoritesContext'
 
-export const Navbar = () => {
-
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
-};
+export default function Navbar() {
+  const { favorites } = useFavorites()
+  return (
+    <nav className="navbar navbar-dark bg-dark">
+      <div className="container">
+        <NavLink className="navbar-brand" to="/">Pokédex</NavLink>
+        <ul className="navbar-nav ms-auto d-flex flex-row">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/favorites">
+              Favorites <span className="badge bg-info">{favorites.length}</span>
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  )
+}
