@@ -10,9 +10,9 @@ export function StoreProvider({ children }) {
 }
 
 export default function useGlobalReducer() {
-  const context = useContext(StoreContext)
-  if (!context) throw new Error('useGlobalReducer must be used within a StoreProvider')
-  return context
+  const ctx = useContext(StoreContext)
+  if (!ctx) throw new Error('useGlobalReducer must be used within StoreProvider')
+  return ctx
 }
 
 export const useToggleFavorite = () => {

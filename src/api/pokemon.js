@@ -2,7 +2,7 @@
 const BASE = 'https://pokeapi.co/api/v2/pokemon'
 
 export async function fetchList() {
-  const res = await fetch(`${BASE}?limit=2000`)
+  const res = await fetch(`${BASE}?limit=1000`)
   if (!res.ok) throw new Error('Error fetching list')
   return (await res.json()).results
 }

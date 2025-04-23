@@ -13,7 +13,7 @@ export default function EntityCard({ item }) {
   const navigate = useNavigate()
 
   return (
-    <div className="card mb-3" onClick={() => navigate(`/pokemon/${id}`)}>
+    <div className="card" onClick={() => navigate(`/pokemon/${id}`)}>
       <div className="row g-0">
         <div className="col-4">
           <img src={getImageUrl(id)} className="img-fluid rounded-start" alt={item.name} />
@@ -22,9 +22,11 @@ export default function EntityCard({ item }) {
           <div className="card-body py-2 d-flex justify-content-between align-items-center">
             <h5 className="card-title text-capitalize mb-0">{item.name}</h5>
             <button
-              className={isFav ? 'btn btn-sm btn-danger' : 'btn.btn-sm.btn-outline-success'}
+              className={isFav ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-outline-success'}
               onClick={e => { e.stopPropagation(); toggleFav({ id, name: item.name, url: item.url }) }}
-            >{isFav ? '★' : '☆'}</button>
+            >
+              {isFav ? '★' : '☆'}
+            </button>
           </div>
         </div>
       </div>

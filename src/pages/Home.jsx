@@ -6,7 +6,7 @@ import { usePokemonList } from '../hooks/usePokemon'
 export default function Home() {
   const { data: list, loading, error } = usePokemonList()
 
-  if (loading) return <div className="text-center my-5"><div className="spinner-border text-primary" /></div>
+  if (loading) return <div className="text-center my-5"><div className="spinner-border text-primary"/></div>
   if (error) return <p className="text-danger text-center mt-4">{error}</p>
 
   return (

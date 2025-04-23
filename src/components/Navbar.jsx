@@ -12,12 +12,12 @@ export default function Navbar() {
   const navigate = useNavigate()
 
   const suggestions = useMemo(
-    () => all?.filter(p => p.name.toLowerCase().includes(query.toLowerCase())).slice(0,5) || [],
+    () => all?.filter(p => p.name.toLowerCase().includes(query.toLowerCase())).slice(0, 5) || [],
     [all, query]
   )
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white mb-4 rounded">
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
         <NavLink className="navbar-brand text-primary fw-bold" to="/">Pokédex</NavLink>
         <div className="d-flex align-items-center">
