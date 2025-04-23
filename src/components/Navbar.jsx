@@ -1,42 +1,43 @@
 // File: src/components/Navbar.jsx
 import React, { useState, useMemo } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import useGlobalReducer from '../hooks/useGlobalReducer'
+import { useStore } from '../hooks/useGlobalReducer'
 import { usePokemonList } from '../hooks/usePokemon'
+import useDebounce from '../hooks/useDebounce'
 import { getIdFromUrl } from '../utils/getIdFromUrl'
 
 export default function Navbar() {
-  const { store } = useGlobalReducer()
-  const { data: all, loading } = usePokemonList()
-  const [query, setQuery] = useState('')
-  const navigate = useNavigate()
+  const { store } = useStore()
+  const { data, loading } = usePokemonList()
+  const [q, setQ] = useState('')
+  const debQ = useDebounce(q)
+  const nav = useNavigate()
 
   const suggestions = useMemo(
-    () => all?.filter(p => p.name.toLowerCase().includes(query.toLowerCase())).slice(0, 5) || [],
-    [all, query]
+    () => data.filter(p => p.name.includes(debQ)).slice(0, 5),
+    [data, debQ]
   )
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
-        <NavLink className="navbar-brand text-primary fw-bold" to="/">Pokédex</NavLink>
-        <div className="d-flex align-items-center">
+        <NavLink className="navbar-brand fw-bold" to="/">Pokédex</NavLink>
+        <div className="d-flex">
           <div className="dropdown me-3">
             <input
               className="form-control dropdown-toggle"
-              type="search"
-              placeholder="Buscar Pokémon..."
-              value={query}
-              onChange={e => setQuery(e.target.value)}
+              placeholder="Search..."
+              value={q}
+              onChange={e => setQ(e.target.value)}
               data-bs-toggle="dropdown"
             />
             <ul className="dropdown-menu">
-              {loading && <li className="dropdown-item">Cargando...</li>}
+              {loading && <li className="dropdown-item">Loading...</li>}
               {suggestions.map(p => (
                 <li key={p.name}>
                   <button
                     className="dropdown-item text-capitalize"
-                    onClick={() => { navigate(`/pokemon/${getIdFromUrl(p.url)}`); setQuery('') }}
+                    onClick={() => { nav(`/pokemon/${getIdFromUrl(p.url)}`); setQ('') }}
                   >
                     {p.name}
                   </button>
@@ -44,9 +45,9 @@ export default function Navbar() {
               ))}
             </ul>
           </div>
-          <NavLink className="btn btn-outline-primary position-relative" to="/favorites">
-            <i className="bi bi-star-fill"></i>
-            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <NavLink to="/favorites" className="btn btn-outline-primary position-relative">
+            ☆
+            <span className="position-absolute top-0 start-100 translate-middle badge bg-danger">
               {store.favorites.length}
             </span>
           </NavLink>

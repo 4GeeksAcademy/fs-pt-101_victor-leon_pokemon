@@ -1,21 +1,18 @@
 // File: src/hooks/useGlobalReducer.jsx
-import React, { createContext, useContext, useReducer, useCallback } from 'react'
-import storeReducer, { initialStore } from '../store'
+import React, { createContext, useReducer, useContext, useCallback } from 'react'
+import reducer, { initialStore } from '../store'
 
-const StoreContext = createContext()
-
+const StoreCtx = createContext()
 export function StoreProvider({ children }) {
-  const [store, dispatch] = useReducer(storeReducer, initialStore())
-  return <StoreContext.Provider value={{ store, dispatch }}>{children}</StoreContext.Provider>
+  const [store, dispatch] = useReducer(reducer, initialStore())
+  return <StoreCtx.Provider value={{ store, dispatch }}>{children}</StoreCtx.Provider>
 }
-
-export default function useGlobalReducer() {
-  const ctx = useContext(StoreContext)
-  if (!ctx) throw new Error('useGlobalReducer must be used within StoreProvider')
+export const useStore = () => {
+  const ctx = useContext(StoreCtx)
+  if (!ctx) throw new Error('useStore must be within StoreProvider')
   return ctx
 }
-
 export const useToggleFavorite = () => {
-  const { dispatch } = useGlobalReducer()
-  return useCallback(item => dispatch({ type: 'FAVORITES_TOGGLE', payload: item }), [dispatch])
+  const { dispatch } = useStore()
+  return useCallback(item => dispatch({ type: 'TOGGLE_FAV', payload: item }), [dispatch])
 }

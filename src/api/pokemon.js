@@ -2,14 +2,14 @@
 const BASE = 'https://pokeapi.co/api/v2/pokemon'
 
 export async function fetchList() {
-  const res = await fetch(`${BASE}?limit=1000`)
-  if (!res.ok) throw new Error('Error fetching list')
+  const res = await fetch(`${BASE}?limit=251`)
+  if (!res.ok) throw new Error('Failed to fetch list')
   return (await res.json()).results
 }
 
 export async function fetchDetail(id) {
   const res = await fetch(`${BASE}/${id}`)
-  if (!res.ok) throw new Error('Error fetching detail')
+  if (!res.ok) throw new Error('Failed to fetch detail')
   return await res.json()
 }
 
