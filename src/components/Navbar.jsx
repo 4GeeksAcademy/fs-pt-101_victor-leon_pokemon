@@ -3,19 +3,16 @@ import React, { useState, useMemo } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useStore } from '../hooks/useGlobalReducer'
 import { usePokemonList } from '../hooks/usePokemon'
-import useDebounce from '../hooks/useDebounce'
-import { getIdFromUrl } from '../utils/getIdFromUrl'
 
 export default function Navbar() {
   const { store } = useStore()
   const { data, loading } = usePokemonList()
   const [q, setQ] = useState('')
-  const debQ = useDebounce(q)
   const nav = useNavigate()
 
   const suggestions = useMemo(
-    () => data.filter(p => p.name.includes(debQ)).slice(0, 5),
-    [data, debQ]
+    () => data.filter(p => p.name.includes(q)).slice(0, 5),
+    [data, q]
   )
 
   return (
@@ -37,7 +34,11 @@ export default function Navbar() {
                 <li key={p.name}>
                   <button
                     className="dropdown-item text-capitalize"
-                    onClick={() => { nav(`/pokemon/${getIdFromUrl(p.url)}`); setQ('') }}
+                    onClick={() => {
+                      const id = p.url.match(/\/(\d+)\/?$/)[1]
+                      nav(`/pokemon/${id}`, { state: { tab: 'Basic' } })
+                      setQ('')
+                    }}
                   >
                     {p.name}
                   </button>

@@ -1,6 +1,6 @@
 // File: src/pages/Home.jsx
 import React from 'react'
-import EntityCard from '../components/EntityCard'
+import PokeCard from '../components/PokeCard'
 import { usePokemonList } from '../hooks/usePokemon'
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
   if (error) return <p className="text-danger text-center mt-4">{error}</p>
   return (
     <div className="row row-cols-2 row-cols-md-4 g-3">
-      {data.map(item => <EntityCard key={item.name} item={item}/>)}
+      {data.map(item => <PokeCard key={item.name} item={item} />)}
     </div>
   )
 }
