@@ -1,4 +1,3 @@
-// File: src/utils/evolution.js
 export function traverseChain(chain = {}) {
   const steps = []
   function walk(node) {

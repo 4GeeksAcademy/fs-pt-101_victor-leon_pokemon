@@ -1,5 +1,3 @@
-// File: src/store.js
-
 export function initialStore() {
   return {
     favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),

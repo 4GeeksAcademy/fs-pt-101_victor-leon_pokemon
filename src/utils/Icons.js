@@ -1,4 +1,3 @@
-// File: src/utils/typeIconsAndMethods.js
 export const typeIcons = {
   normal:    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/1.png',
   fire:      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/brilliant-diamond-and-shining-pearl/10.png',

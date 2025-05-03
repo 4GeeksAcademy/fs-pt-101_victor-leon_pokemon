@@ -1,4 +1,3 @@
-// File: src/pages/Layout.jsx
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../components/Navbar'

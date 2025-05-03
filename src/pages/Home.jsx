@@ -1,4 +1,3 @@
-// File: src/pages/.jsx
 import React from 'react';
 import { usePokemonList } from '../hooks/usePokemon';
 import PokeCard from '../components/PokeCard';

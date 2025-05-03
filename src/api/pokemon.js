@@ -1,4 +1,3 @@
-// File: src/api/pokemon.js
 const BASE = 'https://pokeapi.co/api/v2/pokemon'
 
 export async function fetchList() {
