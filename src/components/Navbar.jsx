@@ -45,12 +45,20 @@ export default function Navbar() {
               ))}
             </ul>
           </div>
-          <NavLink to="/favorites" className="btn btn-outline-primary position-relative">
-            ☆
-            <span className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill"> {/* ← CAMBIO: rounded-pill */}
-              {store.favorites.length}
-            </span>
-          </NavLink>
+          <NavLink
+  to="/favorites"
+  className={`btn ${store.favorites.length > 0 ? 'btn-warning' : 'btn-outline-warning'} position-relative`}
+>
+  <span style={{ fontSize: '1.25rem' }}>
+    {store.favorites.length > 0 ? '★' : '☆'}
+  </span>
+  {store.favorites.length > 0 && (
+    <span className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill">
+      {store.favorites.length}
+    </span>
+  )}
+</NavLink>
+
         </div>
       </div>
     </nav>

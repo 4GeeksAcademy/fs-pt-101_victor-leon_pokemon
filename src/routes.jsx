@@ -1,9 +1,9 @@
 // File: src/routes.jsx
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
-import Layout from './pages/Layout'
-import Home from './pages/Home'
-import PokeDetail from './pages/PokeDetail'
-import Favorites from './pages/Favorites'
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import Layout from './pages/Layout';
+import Home from './pages/Home';
+import PokeDetail from './pages/PokeDetail';
+import Favorites from './pages/Favorites';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,4 +13,4 @@ export const router = createBrowserRouter(
       <Route path="favorites" element={<Favorites />} />
     </Route>
   )
-)
+);

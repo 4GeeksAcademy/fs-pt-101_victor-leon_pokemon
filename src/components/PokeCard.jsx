@@ -16,27 +16,40 @@ export default function PokeCard({ item }) {
 
   return (
     <div
-      className="card"
-      data-type={types[0]?.type.name}        // ← CAMBIO: atributo para colorear borde
+      className="card h-100 shadow-sm"
+      data-type={types[0]?.type.name}
       onClick={() => nav(`/pokemon/${id}`, { state: { tab: 'Basic' } })}
+      style={{ borderRadius: '1rem', overflow: 'hidden', cursor: 'pointer' }}
     >
-      <img src={getImageUrl(id)} className="card-img-top" alt={item.name} />
-      <div className="card-body">
-        <div className="d-flex justify-content-between align-items-center mb-2">
-          <h5 className="card-title mb-0 text-capitalize">{item.name}</h5>
-          <button
-            className={isFav ? 'btn btn-danger' : 'btn btn-outline-success'}
-            onClick={e => { e.stopPropagation(); toggle({ id, name: item.name, url: item.url }) }}
-          >
-            {isFav ? '★' : '☆'}
-          </button>
-        </div>
-        <div>
+      <div className="position-relative bg-light">
+        <img
+          src={getImageUrl(id)}
+          className="w-100"
+          alt={item.name}
+          style={{ objectFit: 'contain', height: '150px' }}
+        />
+        <button
+          className={`btn btn-sm position-absolute top-0 end-0 m-2 ${isFav ? 'btn-warning' : 'btn-outline-warning'}`}
+          onClick={e => {
+            e.stopPropagation()
+            toggle({ id, name: item.name, url: item.url })
+          }}
+        >
+          {isFav ? '★' : '☆'}
+        </button>
+      </div>
+
+      <div className="card-body text-center">
+        <h6 className="text-capitalize mb-2">{item.name}</h6>
+        <div className="d-flex justify-content-center flex-wrap">
           {types.map(t => (
-            <span
+            <img
               key={t.slot}
-              className="type-icon"
-              style={{ backgroundImage: `url(${typeIcons[t.type.name]})` }}
+              src={typeIcons[t.type.name]}
+              alt={t.type.name}
+              title={t.type.name}
+              className="me-1 mb-1"
+              style={{ width: 80, height: 20 }}
             />
           ))}
         </div>
