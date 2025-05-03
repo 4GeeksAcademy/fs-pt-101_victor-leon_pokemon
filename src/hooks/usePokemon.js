@@ -3,7 +3,7 @@ import { useFetch } from './useFetch'
 const BASE = 'https://pokeapi.co/api/v2/pokemon'
 
 export const usePokemonList = () => {
-  const { data, loading, error } = useFetch(`${BASE}?limit=1000`)
+  const { data, loading, error } = useFetch(`${BASE}?limit=251`)
   return { data: data?.results || [], loading, error }
 }
 export const usePokemonDetail = id => useFetch(id ? `${BASE}/${id}` : null)

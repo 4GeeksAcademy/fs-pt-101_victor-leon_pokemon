@@ -1,10 +1,9 @@
-// File: src/components/PokeCard.jsx
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore, useToggleFavorite } from '../hooks/useGlobalReducer'
 import { getImageUrl } from '../api/pokemon'
 import { usePokemonDetail } from '../hooks/usePokemon'
-import { typeIcons } from '../utils/typeIconsAndMethods'
+import { typeIcons } from '../utils/Icons'
 
 export default function PokeCard({ item }) {
   const id = item.url.match(/\/(\d+)\/?$/)[1]
@@ -16,7 +15,11 @@ export default function PokeCard({ item }) {
   const types = detail?.types || []
 
   return (
-    <div className="card" onClick={() => nav(`/pokemon/${id}`, { state: { tab: 'Basic' } })}>
+    <div
+      className="card"
+      data-type={types[0]?.type.name}        // ← CAMBIO: atributo para colorear borde
+      onClick={() => nav(`/pokemon/${id}`, { state: { tab: 'Basic' } })}
+    >
       <img src={getImageUrl(id)} className="card-img-top" alt={item.name} />
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-center mb-2">

@@ -1,4 +1,3 @@
-// File: src/components/Navbar.jsx
 import React, { useState, useMemo } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useStore } from '../hooks/useGlobalReducer'
@@ -48,7 +47,7 @@ export default function Navbar() {
           </div>
           <NavLink to="/favorites" className="btn btn-outline-primary position-relative">
             ☆
-            <span className="position-absolute top-0 start-100 translate-middle badge bg-danger">
+            <span className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill"> {/* ← CAMBIO: rounded-pill */}
               {store.favorites.length}
             </span>
           </NavLink>

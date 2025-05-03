@@ -1,3 +1,4 @@
+// File: src/pages/PokeDetail.jsx
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import {
@@ -9,7 +10,7 @@ import {
 import { getImageUrl } from '../api/pokemon'
 import { traverseChain } from '../utils/evolution'
 import { useToggleFavorite, useStore } from '../hooks/useGlobalReducer'
-import { typeIcons, methodIcons } from '../utils/typeIconsAndMethods'
+import { typeIcons, methodIcons } from '../utils/Icons'
 
 export default function PokeDetail() {
   const { id } = useParams()
@@ -26,10 +27,13 @@ export default function PokeDetail() {
 
   useEffect(() => setTab('Basic'), [id])
 
-  if (loading) return <div className="text-center my-5"><div className="spinner-border"/></div>
+  if (loading) return (
+    <div className="text-center my-5">
+      <div className="spinner-border text-primary" />
+    </div>
+  )
   if (!pkm) return <p className="text-center text-danger mt-4">Not found</p>
 
-  // Prepare data
   const types     = pkm.types || []
   const abilities = pkm.abilities || []
   const stats     = pkm.stats || []
@@ -39,6 +43,10 @@ export default function PokeDetail() {
   })
   const evoSteps = traverseChain(evoData?.chain || {})
 
+  // Metric conversion
+  const heightMeters = (pkm.height * 0.1).toFixed(1)
+  const weightKg     = (pkm.weight * 0.1).toFixed(1)
+
   return (
     <>
       <button className="btn btn-secondary mb-3" onClick={() => navigate('/')}>Home</button>
@@ -47,121 +55,215 @@ export default function PokeDetail() {
           {['Basic','Moves','Encounters','Evolution'].map(t => (
             <li className="nav-item" key={t}>
               <button
-                className={`nav-link${tab===t?' active':''}`}
+                className={`nav-link${tab === t ? ' active' : ''}`}
                 onClick={() => setTab(t)}
               >{t}</button>
             </li>
           ))}
         </ul>
 
-        {tab==='Basic' && (
-          <div className="row">
-            <div className="col-4 text-center">
-              <img src={getImageUrl(id)} className="img-fluid mb-2" alt={pkm.name}/>
+        {/* BASIC TAB */}
+        {tab === 'Basic' && (
+          <div className="row g-3">
+            <div className="col-md-4 text-center">
+              <img
+                src={getImageUrl(id)}
+                className="img-fluid mb-3"
+                alt={pkm.name}
+                style={{ borderRadius: '0.5rem', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}
+              />
+              <h2 className="text-capitalize mb-2">{pkm.name}</h2>
               <button
-                className={store.favorites.some(f=>f.id===id)?'btn btn-danger':'btn btn-outline-success'}
-                onClick={()=>toggleFav({id,name:pkm.name,url:pkm.species.url})}
-              >
-                {store.favorites.some(f=>f.id===id)?'★':'☆'}
-              </button>
-              <h2 className="text-capitalize mt-2">{pkm.name}</h2>
+                className={store.favorites.some(f => f.id === id)
+                  ? 'btn btn-danger btn-sm'
+                  : 'btn btn-outline-success btn-sm'}
+                onClick={() => toggleFav({ id, name: pkm.name, url: pkm.species.url })}
+              >{store.favorites.some(f => f.id === id) ? '★' : '☆'}</button>
             </div>
-            <div className="col-8">
-              <h5>ID</h5><p>{pkm.id}</p>
-              <h5>Height / Weight</h5><p>{pkm.height} dm / {pkm.weight} hg</p>
-              <h5>Base Experience</h5><p>{pkm.base_experience}</p>
-              <h5>Types</h5>
-              {types.map(t=>(
-                <span key={t.slot}
-                  className="type-icon"
-                  style={{backgroundImage:`url(${typeIcons[t.type.name]})`}}
-                />
-              ))}
-              <h5 className="mt-3">Abilities</h5>
-              {abilities.map(a=>(
-                <p key={a.slot} className="text-capitalize">
-                  {a.ability.name}{a.is_hidden?' (hidden)':''}
-                </p>
-              ))}
-              <h5 className="mt-3">Stats</h5>
-              {stats.map(s=>(
-                <div key={s.stat.name} className="mb-2">
-                  <strong className="text-capitalize">{s.stat.name}</strong>: {s.base_stat}
-                  <div className="progress mt-1">
-                    <div className="progress-bar" style={{width:`${(s.base_stat/255)*100}%`}}/>
+            <div className="col-md-8">
+              <div className="row">
+                <div className="col-sm-6 mb-3">
+                  <div className="p-3 bg-light rounded">
+                    <h6 className="mb-1">Height</h6>
+                    <p className="mb-0">{heightMeters} m</p>
                   </div>
                 </div>
-              ))}
-              <h5 className="mt-3">Moves Known</h5><p>{pkm.moves.length}</p>
-              <h5 className="mt-3">Species</h5><p className="text-capitalize">{spc?.name}</p>
-              <h5 className="mt-3">Habitat</h5><p className="text-capitalize">{spc?.habitat?.name||'Unknown'}</p>
-              <h5 className="mt-3">Flavor Text</h5>
-              <p>{spc?.flavor_text_entries.find(e=>e.language.name==='en')?.flavor_text.replace(/\n|\f/g,' ')||'—'}</p>
+                <div className="col-sm-6 mb-3">
+                  <div className="p-3 bg-light rounded">
+                    <h6 className="mb-1">Weight</h6>
+                    <p className="mb-0">{weightKg} kg</p>
+                  </div>
+                </div>
+                <div className="col-12 mb-3">
+                  <div className="p-3 bg-light rounded">
+                    <h6 className="mb-1">Types</h6>
+                    {types.map(t => (
+                      <img
+                        key={t.slot}
+                        src={typeIcons[t.type.name]}
+                        alt={t.type.name}
+                        title={t.type.name}
+                        className="me-2"
+                        style={{ width: 'auto', height: '20px' }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="col-12 mb-3">
+                  <div className="p-3 bg-light rounded">
+                    <h6 className="mb-1">Abilities</h6>
+                    <ul className="mb-0" style={{ paddingLeft: '1rem' }}>
+                      {abilities.map(a => (
+                        <li key={a.slot} className="text-capitalize">
+                          {a.ability.name}{a.is_hidden && ' (Hidden)'}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-12 mb-3">
+                  <div className="p-3 bg-light rounded">
+                    <h6 className="mb-1">Stats</h6>
+                    {stats.map(s => (
+                      <div key={s.stat.name} className="mb-2">
+                        <div className="d-flex justify-content-between">
+                          <span className="text-capitalize">{s.stat.name}</span>
+                          <span>{s.base_stat}</span>
+                        </div>
+                        <div className="progress" style={{ height: '6px' }}>
+                          <div
+                            className="progress-bar"
+                            role="progressbar"
+                            style={{ width: `${(s.base_stat/255)*100}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="col-12">
+                  <div className="p-3 bg-light rounded">
+                    <h6 className="mb-1">Description</h6>
+                    <p className="mb-0">
+                      {spc?.flavor_text_entries
+                        .find(e => e.language.name === 'en')
+                        ?.flavor_text.replace(/\n|\f/g, ' ') || '—'}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
-        {tab==='Moves' && (
+        {/* MOVES TAB */}
+        {tab === 'Moves' && (
           <table className="table table-sm">
-            <thead><tr><th>Move</th><th>Details</th></tr></thead>
+            <thead>
+              <tr><th>Move</th><th>Method</th><th>Game</th></tr>
+            </thead>
             <tbody>
-              {Object.entries(movesMap).map(([mv, det])=>(
-                <tr key={mv}>
-                  <td className="text-capitalize align-middle">{mv}</td>
-                  <td>
-                    {det.map((d,i)=>(
-                      <div key={i} className="d-flex align-items-center mb-1" title={d.move_learn_method.name}>
-                        <img src={methodIcons[d.move_learn_method.name]||methodIcons.machine} width={24} height={24} className="me-1"/>
-                        <span className="text-capitalize me-2">{d.version_group.name.replace('-',' ')}</span>
-                        {d.move_learn_method.name==='level-up' && d.level_learned_at && <small>Lv.{d.level_learned_at}</small>}
-                      </div>
-                    ))}
-                  </td>
-                </tr>
-              ))}
+              {Object.entries(movesMap).map(([mv, dets]) =>
+                dets.map((d, i) => (
+                  <tr key={`${mv}-${i}`}> {/**/}
+                    {i === 0 && (
+                      <td rowSpan={dets.length} className="align-middle text-capitalize">
+                        {mv}
+                      </td>
+                    )}
+                    <td className="align-middle text-center" style={{ verticalAlign: 'middle' }}>
+                      <img
+                        src={methodIcons[d.move_learn_method.name] || methodIcons.machine}
+                        width={24} height={24}
+                        alt={d.move_learn_method.name}
+                        title={d.move_learn_method.name}
+                      />
+                      {d.move_learn_method.name === 'level-up' && d.level_learned_at && (
+                        <small className="d-block text-muted">Lv.{d.level_learned_at}</small>
+                      )}
+                    </td>
+                    <td className="align-middle text-capitalize">
+                      {d.version_group.name.replace(/-/g, ' ')}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         )}
 
-        {tab==='Encounters' && (
-          (enc.length?
-            enc.map((e,i)=>(
-              <div key={i} className="mb-2">
-                <strong className="text-capitalize">{e.location_area.name.replace('-',' ')}</strong>
-                <ul className="list-inline">
-                  {e.version_details.map((v,j)=>(
-                    <li key={j} className="list-inline-item me-3 small text-muted">
-                      {v.version.name}: {v.max_chance}% (rarity {v.rarity})
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          : <p>No encounters.</p>)
-        )}
-
-        {tab==='Evolution' && (
-          <div className="d-flex flex-wrap">
-            {evoSteps.map((step,i)=>{
-              const sid = step.species.url.match(/\/(\d+)\/?$/)[1]
-              const det = step.details[0]||{}
-              const m = det.trigger?.name||'level-up'
-              return (
-                <div key={i} className="card text-center p-2 m-2" style={{width:120,cursor:'pointer'}}
-                  onClick={()=>navigate(`/pokemon/${sid}`,{state:{tab:'Basic'}})}>
-                  <img src={getImageUrl(sid)} className="card-img-top" alt={step.species.name}/>
-                  <div className="card-body p-1">
-                    <p className="small text-capitalize mb-1">{step.species.name}</p>
-                    <div className="d-flex align-items-center justify-content-center" title={m}>
-                      <img src={methodIcons[m]||methodIcons.machine} width={24} height={24} className="me-1"/>
-                      {m==='level-up'&&det.min_level?<small className="text-muted">Lv.{det.min_level}</small>:null}
-                    </div>
-                  </div>
+        {/* ENCOUNTERS TAB */}
+        {tab === 'Encounters' && (
+          <div className="row">
+            {enc.length ? (
+              Object.entries(enc.reduce((acc, e) => {
+                e.version_details.forEach(v => {
+                  const game = v.version.name.replace(/-/g, ' ')
+                  if (!acc[game]) acc[game] = []
+                  acc[game].push({ area: e.location_area.name.replace(/-/g, ' '), rarity: v.rarity })
+                })
+                return acc
+              }, {})).map(([game, areas]) => (
+                <div key={game} className="col-12 mb-3">
+                  <h6 className="text-capitalize mb-2">{game}</h6>
+                  <ul className="list-group">
+                    {areas.map((a, i) => (
+                      <li key={`${game}-${i}`} className="list-group-item d-flex justify-content-between">
+                        <span>{a.area}</span>
+                        <span className="badge bg-danger rounded-pill">{a.rarity}%</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              )
-            })}
+              ))
+            ) : (
+              <p>No encounters.</p>
+            )}
           </div>
         )}
+
+        {/* EVOLUTION TAB */}
+        {tab === 'Evolution' && (
+  <div className="d-flex flex-wrap">
+    {evoSteps.map((step, i) => {
+      const sid = step.species.url.match(/\/(\d+)\/?$/)[1]
+      const det = step.details[0] || {}
+      return (
+        <div
+          key={i}
+          className="card text-center p-2 m-2"
+          style={{ width: 120, cursor: 'pointer' }}
+          onClick={() => navigate(`/pokemon/${sid}`, { state: { tab: 'Basic' } })}
+        >
+          <img
+            src={getImageUrl(sid)}
+            className="card-img-top"
+            alt={step.species.name}
+            title={det.trigger?.name}
+          />
+          <p className="small text-capitalize mt-1 mb-1">{step.species.name}</p>
+
+          {det.trigger?.name && (
+            <div className="text-center">
+              <img
+                src={methodIcons[det.trigger.name] || ''}
+                width={24}
+                height={24}
+                alt={det.trigger.name}
+                title={det.trigger.name}
+              />
+              {det.trigger.name === 'level-up' && det.min_level && (
+                <small className="d-block text-muted">Lv.{det.min_level}</small>
+              )}
+            </div>
+          )}
+        </div>
+      )
+    })}
+  </div>
+)}
+
+
       </div>
     </>
   )

@@ -1,30 +1,135 @@
-/* File: src/index.css */
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css');
 
+:root {
+  --bg-page: #f0f0f0;
+  --nav-border: #ffcb05;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.15);
+
+  --type-normal:   #A8A77A;
+  --type-fire:     #EE8130;
+  --type-water:    #6390F0;
+  --type-grass:    #7AC74C;
+  --type-electric: #F7D02C;
+  --type-ice:      #96D9D6;
+  --type-fighting:#C22E28;
+  --type-poison:   #A33EA1;
+  --type-ground:   #E2BF65;
+  --type-flying:   #A98FF3;
+  --type-psychic:  #F95587;
+  --type-bug:      #A6B91A;
+  --type-rock:     #B6A136;
+  --type-ghost:    #735797;
+  --type-dragon:   #6F35FC;
+  --type-dark:     #705746;
+  --type-steel:    #B7B7CE;
+  --type-fairy:    #D685AD;
+}
+
 body {
-  background: #f0f0f0;
+  background: var(--bg-page);
   color: #333;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
 }
+
 .navbar {
   background: #fff;
-  border-bottom: 3px solid #ffcb05;
+  border-bottom: 3px solid var(--nav-border);
   position: fixed; top: 0; width: 100%; z-index: 1000;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.container { padding: 2rem; padding-top: 6rem; }
+
+.container {
+  padding: 2rem;
+  padding-top: 6rem;
+}
+
 .card {
-  margin: .5rem; border: none; border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: .2s;
+  border: 2px solid transparent; 
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 4px 8px var(--card-shadow); 
+  transition: transform 0.2s ease,          
+              box-shadow 0.2s ease,         
+              border-color 0.2s ease;       
   cursor: pointer;
 }
+
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  transform: translateY(-4px);              
+  box-shadow: 0 8px 16px var(--card-shadow-hover);
 }
+
 .type-icon {
-  width: 40px; height: 40px; display: inline-block;
-  background-size: contain; background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
   margin-right: .5rem;
+}
+
+.card[data-type="normal"]   { border-color: var(--type-normal); }
+.card[data-type="fire"]     { border-color: var(--type-fire); }
+.card[data-type="water"]    { border-color: var(--type-water); }
+.card[data-type="grass"]    { border-color: var(--type-grass); }
+.card[data-type="electric"] { border-color: var(--type-electric); }
+.card[data-type="ice"]      { border-color: var(--type-ice); }
+.card[data-type="fighting"] { border-color: var(--type-fighting); }
+.card[data-type="poison"]   { border-color: var(--type-poison); }
+.card[data-type="ground"]   { border-color: var(--type-ground); }
+.card[data-type="flying"]   { border-color: var(--type-flying); }
+.card[data-type="psychic"]  { border-color: var(--type-psychic); }
+.card[data-type="bug"]      { border-color: var(--type-bug); }
+.card[data-type="rock"]     { border-color: var(--type-rock); }
+.card[data-type="ghost"]    { border-color: var(--type-ghost); }
+.card[data-type="dragon"]   { border-color: var(--type-dragon); }
+.card[data-type="dark"]     { border-color: var(--type-dark); }
+.card[data-type="steel"]    { border-color: var(--type-steel); }
+.card[data-type="fairy"]    { border-color: var(--type-fairy); }
+
+
+.navbar .badge {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar .btn:hover .badge {
+  transform: scale(1.1);  
+  opacity: 0.9;           
+}
+
+.dropdown-toggle.form-control {
+  border-radius: 2rem;            
+  transition: box-shadow 0.2s ease;
+}
+
+.dropdown-toggle.form-control:focus {
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.6); 
+}
+
+@keyframes pulse {                          
+  0%   { background-color: #e0e0e0; }
+  50%  { background-color: #f0f0f0; }
+  100% { background-color: #e0e0e0; }
+}
+
+.skeleton-card {                            
+  height: 200px;
+  border-radius: 1rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.table-sm tbody tr:hover {                 
+  background: rgba(0, 0, 0, 0.03);
+  transition: background 0.2s ease;
+}
+
+.list-inline-item {                         
+  margin-right: 1rem;
+  transition: color 0.2s ease;
+}
+
+.list-inline-item:hover {                   
+  color: rgba(0, 0, 0, 0.7);
 }
