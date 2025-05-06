@@ -60,6 +60,7 @@ body {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px var(--card-shadow-hover);
+  z-index: 10; /* ✅ eleva la tarjeta sobre las vecinas */
 }
 
 .card[data-type="normal"]   { border-color: var(--type-normal); }
@@ -132,4 +133,103 @@ body {
 
 .list-inline-item:hover {
   color: rgba(0, 0, 0, 0.7);
+}
+
+/* PAGINATION */
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  padding: 0;
+}
+
+.page-item {
+  list-style: none;
+}
+
+.page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #fff;
+  color: #ffcb05;
+  border: 2px solid #ffcb05;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.page-link:hover,
+.page-link:focus {
+  background-color: #ffcb05;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 203, 5, 0.5);
+}
+
+.page-item.active .page-link {
+  background-color: #ffcb05;
+  color: white;
+  border-color: #ffcb05;
+  font-weight: 600;
+  box-shadow: 0 0 6px rgba(255, 203, 5, 0.6);
+  transform: scale(1.05);
+}
+
+@media (max-width: 576px) {
+  .page-link {
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/* Esconder scroll si quieres limpieza visual */
+::-webkit-scrollbar {
+  height: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffcb05;
+  border-radius: 4px;
+}
+
+
+/* home title */
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: 1px 1px 2px #444;
+  border-bottom: 3px solid #ffcb05;
+  padding-bottom: 0.25rem;
+  margin: 0 auto;
+}
+
+.pokeball-icon {
+  display: inline-block;
+  filter: drop-shadow(0 0 4px rgba(255, 203, 5, 0.6));
+  transition: transform 0.2s ease;
+}
+
+.pokeball-icon:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 576px) {
+  .home-title {
+    font-size: 1.75rem;
+    border-width: 2px;
+  }
+
 }
