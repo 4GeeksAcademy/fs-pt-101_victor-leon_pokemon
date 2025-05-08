@@ -5,6 +5,7 @@
   --nav-border: #ffcb05;
   --card-shadow: rgba(0, 0, 0, 0.1);
   --card-shadow-hover: rgba(0, 0, 0, 0.15);
+  --region-border: #85c1dc;
 
   --type-normal:   #A8A77A;
   --type-fire:     #EE8130;
@@ -81,6 +82,33 @@ body {
 .card[data-type="dark"]     { border-color: var(--type-dark); }
 .card[data-type="steel"]    { border-color: var(--type-steel); }
 .card[data-type="fairy"]    { border-color: var(--type-fairy); }
+
+.region-card {
+  border: 2px solid var(--region-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.region-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: #5dade2;
+}
+
+.region-card img {
+  height: 200px;
+  object-fit: contain;
+  background-color: #f8f8f8;
+  padding: 1rem;
+}
+
+.region-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .type-icon {
   width: 30px;

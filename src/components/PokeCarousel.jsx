@@ -77,7 +77,7 @@ export default function PokeCarousel({ pokemonList = [] }) {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-between gap-2">
+    <div className="d-flex align-items-center justify-content-between">
       <button
         className="btn btn-outline-warning d-none d-md-flex align-items-center justify-content-center"
         onClick={() => scroll(-300)}
@@ -89,7 +89,7 @@ export default function PokeCarousel({ pokemonList = [] }) {
 
       <div
         ref={scrollRef}
-        className="d-flex overflow-auto px-2 pb-2 flex-grow-1 pokemon-carousel"
+        className="d-flex overflow-auto px-2 pt-2 pb-2 flex-grow-1 pokemon-carousel"
         style={{ scrollBehavior: 'smooth', gap: '1rem', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {batches.flat().map((pokemon, index) => (

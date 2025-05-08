@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div className="container mt-4">
-      <h2 className="home-title text-center mb-4 d-flex align-items-center justify-content-center gap-2">
+      <h2 className="home-title text-center mb-1 d-flex align-items-center justify-content-center gap-2">
         <img
           src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/6a/latest/20230115164405/Pok%C3%A9_Ball_EP.png/150px-Pok%C3%A9_Ball_EP.png"
           alt="Poké Ball"
