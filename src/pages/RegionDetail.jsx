@@ -24,9 +24,9 @@ export default function RegionDetail() {
     <div className="container mt-4">
       <button
         onClick={() => navigate(-1)}
-        className="btn btn-outline-secondary mb-4"
+        className="btn btn-outline-warning text-black mb-4"
       >
-        ← Back to Regions
+        Back to Regions
       </button>
 
       <h2 className="text-capitalize mb-4">{data.name} Region</h2>

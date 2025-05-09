@@ -5,8 +5,7 @@ import { regionImages } from '../api/region';
 export default function RegionCard({ region }) {
   const navigate = useNavigate();
   const regionId = region.url.match(/\/(\d+)\/?$/)[1];
-  const imageUrl = regionImages[regionId] || 'https://via.placeholder.com/400x200?text=Region';
-
+  const imageUrl = regionImages[regionId]
   return (
     <div
       className="card h-100 text-center region-card"

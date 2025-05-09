@@ -92,8 +92,8 @@ body {
 }
 
 .region-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px var(0, 0, 0, 0.2);
   border-color: #5dade2;
 }
 
