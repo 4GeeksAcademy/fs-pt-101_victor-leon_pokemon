@@ -4,7 +4,7 @@
   --bg-page: #f0f0f0;
   --nav-border: #ffcb05;
   --card-shadow: rgba(0, 0, 0, 0.1);
-  --card-shadow-hover: rgba(0, 0, 0, 0.15);
+  
   --region-border: #85c1dc;
 
   --type-normal:   #A8A77A;
@@ -93,7 +93,7 @@ body {
 
 .region-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px var(0, 0, 0, 0.2);
+ 
   border-color: #5dade2;
 }
 
@@ -220,15 +220,6 @@ body {
     font-size: 0.85rem;
     border-radius: 0.5rem;
   }
-}
-
-/* Esconder scroll si quieres limpieza visual */
-::-webkit-scrollbar {
-  height: 0;
-}
-::-webkit-scrollbar-thumb {
-  background: #ffcb05;
-  border-radius: 4px;
 }
 
 

@@ -23,7 +23,7 @@ export default function RegionDetail() {
   return (
     <div className="container mt-4">
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(`/region`)}
         className="btn btn-outline-warning text-black mb-4"
       >
         Back to Regions
@@ -32,33 +32,11 @@ export default function RegionDetail() {
       <h2 className="text-capitalize mb-4">{data.name} Region</h2>
 
       <div className="mb-4">
-        <h5>Localized Names:</h5>
-        <ul className="list-group">
-          {data.names?.map((name, index) => (
-            <li key={index} className="list-group-item">
-              <strong>{name.language.name}:</strong> {name.name}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mb-4">
         <h5>Locations:</h5>
         <ul className="list-group">
           {data.locations?.map((loc) => (
             <li key={loc.name} className="list-group-item text-capitalize">
               {loc.name.replace(/-/g, ' ')}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mb-4">
-        <h5>Version Groups:</h5>
-        <ul className="list-group">
-          {data.version_groups?.map((vg) => (
-            <li key={vg.name} className="list-group-item text-capitalize">
-              {vg.name.replace(/-/g, ' ')}
             </li>
           ))}
         </ul>

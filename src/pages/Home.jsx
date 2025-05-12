@@ -47,8 +47,9 @@ export default function Home() {
       {/* Título Regiones */}
       <h2 className="home-title text-center mb-1 d-flex align-items-center justify-content-center gap-2">
         <img
-          src="https://cdn-icons-png.flaticon.com/512/727/727803.png"
+          src="https://images.wikidexcdn.net/mwuploads/wikidex/c/cd/latest/20211230005045/Artwork_mapa_pueblo.png"
           alt="Region icon"
+          className="pokeball-icon"
           width="40"
           height="40"
         />
