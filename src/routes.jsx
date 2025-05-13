@@ -6,6 +6,8 @@ import PokeDetail from './pages/PokeDetail';
 import Favorites from './pages/Favorites';
 import Region from './pages/Region';
 import RegionDetail from './pages/RegionDetail';
+import Location from './pages/Location';
+import Area from './pages/Area';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +18,8 @@ export const router = createBrowserRouter(
       <Route path="favorites" element={<Favorites />} />
       <Route path="region" element={<Region />} />
       <Route path="region/:id" element={<RegionDetail />} />
+      <Route path="location/:id" element={<Location />} />
+      <Route path="area/:id" element={<Area />} />
     </Route>
   )
 );

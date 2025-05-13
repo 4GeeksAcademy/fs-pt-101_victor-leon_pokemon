@@ -57,7 +57,17 @@ export default function Pokemon() {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4 text-center">Pokémon List</h2>
+       {/* Title Pokémon */}
+      <h2 className="home-title text-center mb-1 d-flex align-items-center justify-content-center gap-2">
+        <img
+          src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/6/6a/latest/20230115164405/Pok%C3%A9_Ball_EP.png/150px-Pok%C3%A9_Ball_EP.png"
+          alt="Poké Ball"
+          className="pokeball-icon"
+          width="40"
+          height="40"
+        />
+        <span className="text">Pokémon</span>
+      </h2>
 
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {currentItems.map((pokemon) => (

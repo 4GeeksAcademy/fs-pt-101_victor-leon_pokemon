@@ -17,7 +17,7 @@ export default function Navbar() {
   const hasFavs = store.favorites.length > 0;
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           <img

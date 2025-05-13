@@ -1,5 +1,3 @@
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css');
-
 :root {
   --bg-page: #f0f0f0;
   --nav-border: #ffcb05;
@@ -45,8 +43,8 @@ body {
 }
 
 .container {
-  padding: 1.5rem;
-  padding-top: 3.5rem;
+  /* padding: 1.5rem; */
+  /* padding-top: 3.5rem; */
 }
 
 .card {
@@ -99,9 +97,9 @@ body {
 
 .region-card img {
   height: 200px;
-  object-fit: contain;
+  /* object-fit: contain; */
   background-color: #f8f8f8;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .region-card .card-body {
@@ -245,10 +243,35 @@ body {
   transform: scale(1.1);
 }
 
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000000;
+  text-shadow: 1px 1px 2px #444;
+  padding-bottom: 0.25rem;
+  margin: 0 auto;
+}
+
+
 @media (max-width: 576px) {
   .home-title {
     font-size: 1.75rem;
     border-width: 2px;
   }
+  .page-title {
+    font-size: 1.75rem;
+    border-width: 2px;
+  }
 
 }
+
+.location-area-item {
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.location-area-item:hover {
+  background-color: #fff3cd;
+  color: #856404;
+}
+

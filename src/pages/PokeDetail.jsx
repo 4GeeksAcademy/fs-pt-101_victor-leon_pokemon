@@ -46,7 +46,7 @@ export default function PokeDetail() {
   const weightKg     = (pkm.weight * 0.1).toFixed(1)
 
   return (
-    <div className="card p-4 mx-auto mt-5" style={{ maxWidth: 800 }}>
+    <div className="card p-4 mx-auto mb-5 mt-5" style={{ maxWidth: 800 }}>
       <ul className="nav nav-tabs mb-3">
         {['Basic','Moves','Encounters','Evolution'].map(t => (
           <li className="nav-item" key={t}>

@@ -28,7 +28,17 @@ export default function Region() {
 
   return (
     <div className="container-fluid mt-4">
-      <h2 className="text-center mb-4">Regions</h2>
+      {/* Title Regions */}
+      <h2 className="page-title text-center mb-1 d-flex align-items-center justify-content-center gap-2 mb-4">
+        <img
+          src="https://images.wikidexcdn.net/mwuploads/wikidex/c/cd/latest/20211230005045/Artwork_mapa_pueblo.png"
+          alt="Region icon"
+          className="pokeball-icon"
+          width="40"
+          height="40"
+        />
+        <span className="text">Regions</span>
+      </h2>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {regions.map((region) => (
           <div className="col" key={region.name}>

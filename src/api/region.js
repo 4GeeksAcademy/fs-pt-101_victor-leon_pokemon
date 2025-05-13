@@ -8,7 +8,7 @@ export const regionImages = {
   5: 'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/2/29/latest/20160818015101/Teselia_N2B2.png/1500px-Teselia_N2B2.png',
   6: 'https://images.wikidexcdn.net/mwuploads/wikidex/0/05/latest/20160917035956/Mapa_Kalos.png',
   7: 'https://images.wikidexcdn.net/mwuploads/wikidex/e/e5/latest/20170819025541/Alola_USUL.png',
-  8: 'https://images.wikidexcdn.net/mwuploads/wikidex/4/41/latest/20190227161647/Galar.png',
+  8: 'https://images.nintendolife.com/4758ae93f17ed/galar.original.jpg',
   9: 'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/5b/latest/20210819111244/Hisui.png/2000px-Hisui.png?20210819111244',
   10: 'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/a1/latest/20220803152242/Paldea.jpg/2000px-Paldea.jpg',
 };
