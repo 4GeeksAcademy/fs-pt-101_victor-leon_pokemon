@@ -27,7 +27,7 @@ export default function Region() {
   }
 
   return (
-    <div className="container-fluid mt-4">
+    <div className="container mt-4">
       {/* Title Regions */}
       <h2 className="page-title text-center mb-1 d-flex align-items-center justify-content-center gap-2 mb-4">
         <img

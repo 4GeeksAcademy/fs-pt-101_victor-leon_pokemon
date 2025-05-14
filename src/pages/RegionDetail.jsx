@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { getIdFromUrl } from '../utils/getIdFromUrl';
-import { regionImages } from '../api/region';
+import { regionImages, getRegionNameImage } from '../api/region';
 
 export default function RegionDetail() {
   const { id } = useParams();
@@ -21,30 +21,37 @@ export default function RegionDetail() {
     return <p className="text-center text-danger mt-4">Error loading region data.</p>;
   }
 
-  const imageUrl = regionImages[id] || 'https://via.placeholder.com/800x200?text=Region';
+  const mapImageUrl = regionImages[id] || 'https://via.placeholder.com/800x200?text=Region';
+  const nameImageUrl = getRegionNameImage(data.name); // Imagen local del nombre
 
   return (
-    <div className="container-fluid" style={{ padding: 0 }} >
+    <div className="container-fluid" style={{ padding: 0 }}>
       <div className="position-relative mb-4 w-100" style={{ height: '300px' }}>
         <img
-          src={imageUrl}
+          src={mapImageUrl}
           alt={data.name}
           className="w-100 h-100 object-fit-cover"
           style={{ objectFit: 'cover' }}
         />
-        <h2 className="region-title position-absolute top-50 start-50 translate-middle text-white text-shadow text-capitalize">
-          {data.name} Region
-        </h2>
+        <img
+          src={nameImageUrl}
+          alt={data.name}
+          className="position-absolute top-50 start-50 translate-middle"
+          style={{ maxWidth: '20%', height: 'auto' }}
+        />
       </div>
 
       <div className="container mb-4">
         <button
-        onClick={() => navigate(`/region`)}
-        className="btn btn-outline-warning text-black mb-4"
-      >     
-        Back to Regions
-      </button>
-        <h5>Locations:</h5>
+          onClick={() => navigate(`/region`)}
+          className="btn btn-outline-warning text-black mb-4"
+        >
+          Back to Regions
+        </button>
+
+        <h3 className="text-center fw-bold text-decoration-underline mb-3 text-uppercase text-emphasis">
+          Locations
+        </h3>
         <ul className="list-group">
           {data.locations?.map((loc) => (
             <li

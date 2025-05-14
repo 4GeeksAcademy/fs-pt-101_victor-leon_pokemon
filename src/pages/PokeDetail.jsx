@@ -195,7 +195,8 @@ export default function PokeDetail() {
             const game = v.version.name.replace(/-/g, ' ');
             if (!acc[game]) acc[game] = [];
             acc[game].push({
-              area: e.location_area.name.replace(/-/g, ' ')
+              name: e.location_area.name.replace(/-/g, ' '),
+              url: e.location_area.url
             });
           });
           return acc;
@@ -206,11 +207,19 @@ export default function PokeDetail() {
             <strong className="text-capitalize">{game}</strong>
           </h6>
           <ul className="list-group">
-            {areas.map((a, i) => (
-              <li key={`${game}-${i}`} className="list-group-item">
-                {a.area}
-              </li>
-            ))}
+            {areas.map((a, i) => {
+              const areaId = a.url.match(/\/(\d+)\/?$/)?.[1];
+              return (
+                <li
+                  key={`${game}-${i}`}
+                  className="list-group-item text-capitalize clickable"
+                  onClick={() => navigate(`/area/${areaId}`)}
+                  role="button"
+                >
+                  {a.name}
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))
@@ -219,6 +228,7 @@ export default function PokeDetail() {
     )}
   </div>
 )}
+
 
 
       {tab === 'Evolution' && (
