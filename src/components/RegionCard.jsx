@@ -6,7 +6,7 @@ export default function RegionCard({ region }) {
   const navigate = useNavigate();
   const regionId = region.url.match(/\/(\d+)\/?$/)[1];
   const imageUrl = regionImages[regionId];
-  const nameImageUrl = getRegionNameImage(region.name); // Imagen PNG del nombre
+  const nameImageUrl = getRegionNameImage(region.name);
 
   return (
     <div

@@ -21,7 +21,7 @@ export default function RegionDetail() {
     return <p className="text-center text-danger mt-4">Error loading region data.</p>;
   }
 
-  const mapImageUrl = regionImages[id] || 'https://via.placeholder.com/800x200?text=Region';
+  const mapImageUrl = regionImages[id];
   const nameImageUrl = getRegionNameImage(data.name); // Imagen local del nombre
 
   return (

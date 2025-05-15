@@ -6,13 +6,20 @@ import { usePokemonDetail } from '../hooks/usePokemon'
 import { typeIcons } from '../utils/Icons'
 
 export default function PokeCard({ item }) {
-  const id = item.url.match(/\/(\d+)\/?$/)[1]
-  const { store } = useStore()
-  const toggle = useToggleFavorite()
-  const isFav = store.favorites.some(f => f.id === id)
-  const nav = useNavigate()
-  const { data: detail } = usePokemonDetail(id)
-  const types = detail?.types || []
+  const nav = useNavigate();
+  const toggle = useToggleFavorite();
+  const { store } = useStore();
+
+  // Extraer ID desde URL (como string)
+  const idMatch = item?.url?.match(/\/(\d+)\/?$/);
+  if (!idMatch) return <p className="text-danger">Invalid Pokémon data</p>;
+
+  const id = idMatch[1]; // '25' (string)
+  const idNumber = Number(id); // 25 (número para comparación segura)
+
+  const isFav = store.favorites.some(f => f.id === idNumber && f.type === 'pokemon');
+  const { data: detail } = usePokemonDetail(id);
+  const types = detail?.types || [];
 
   return (
     <div
@@ -31,8 +38,13 @@ export default function PokeCard({ item }) {
         <button
           className={`btn btn-sm position-absolute top-0 end-0 m-2 ${isFav ? 'btn-warning' : 'btn-outline-warning'}`}
           onClick={e => {
-            e.stopPropagation()
-            toggle({ id, name: item.name, url: item.url })
+            e.stopPropagation();
+            toggle({
+              id: idNumber,
+              name: item.name,
+              url: item.url,
+              type: 'pokemon'
+            });
           }}
         >
           {isFav ? '★' : '☆'}
@@ -55,5 +67,5 @@ export default function PokeCard({ item }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

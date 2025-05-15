@@ -29,12 +29,13 @@ export default function Area() {
         >
           Back to Regions
         </button>
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-outline-warning text-black mb-2"
-        >
-          Back to Location
-        </button>
+       <button
+  onClick={() => navigate(`/location/${data.location.url.split('/')[6]}`)}
+  className="btn btn-outline-warning text-black mb-2"
+>
+  Back to Location
+</button>
+
       </div>
 
       <h2 className="location-title text-capitalize mb-4 text-center">
@@ -42,7 +43,7 @@ export default function Area() {
       </h2>
 
       <div className="mb-4">
-        <h5 className="location-section-title text-center">Encounters</h5>
+        <h5 className="location-section-title mb-4">Encounters</h5>
         {data.pokemon_encounters?.length ? (
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             {data.pokemon_encounters.map((enc, i) => (

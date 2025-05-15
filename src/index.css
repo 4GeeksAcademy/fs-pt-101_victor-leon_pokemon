@@ -42,11 +42,6 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.container {
-  /* padding: 1.5rem; */
-  /* padding-top: 3.5rem; */
-}
-
 .card {
   border: 2px solid transparent;
   border-radius: 1rem;
@@ -323,4 +318,18 @@ body {
 
 .clickable:hover {
   background-color: #fef4dd;
+}
+
+
+.item-detail-page {
+  font-size: 1rem;
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-info {
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
 }

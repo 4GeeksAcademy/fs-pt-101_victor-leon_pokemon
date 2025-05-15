@@ -33,22 +33,23 @@ export default function PokeDetail() {
   )
   if (!pkm) return <p className="text-center text-danger mt-4">Not found</p>
 
-  const types     = pkm.types || []
+  const types = pkm.types || []
   const abilities = pkm.abilities || []
-  const stats     = pkm.stats || []
-  const movesMap  = {}
+  const stats = pkm.stats || []
+  const movesMap = {}
   pkm.moves?.forEach(mv => {
     movesMap[mv.move.name] = (movesMap[mv.move.name] || []).concat(mv.version_group_details)
   })
   const evoSteps = traverseChain(evoData?.chain || {})
-
   const heightMeters = (pkm.height * 0.1).toFixed(1)
-  const weightKg     = (pkm.weight * 0.1).toFixed(1)
+  const weightKg = (pkm.weight * 0.1).toFixed(1)
+
+  const isFav = store.favorites.some(f => f.id === id && f.type === 'pokemon')
 
   return (
     <div className="card p-4 mx-auto mb-5 mt-5" style={{ maxWidth: 800 }}>
       <ul className="nav nav-tabs mb-3">
-        {['Basic','Moves','Encounters','Evolution'].map(t => (
+        {['Basic', 'Moves', 'Encounters', 'Evolution'].map(t => (
           <li className="nav-item" key={t}>
             <button
               className={`nav-link${tab === t ? ' active' : ''}`}
@@ -69,10 +70,21 @@ export default function PokeDetail() {
             />
             <h2 className="text-capitalize mb-2">{pkm.name}</h2>
             <button
-  className={`btn btn-sm ${store.favorites.some(f => f.id === id) ? 'btn-warning' : 'btn-outline-warning'}`}
-  onClick={() => toggleFav({ id, name: pkm.name, url: pkm.species.url })}
+  className={`btn btn-sm ${
+    store.favorites.some(f => f.id === Number(id) && f.type === 'pokemon')
+      ? 'btn-warning'
+      : 'btn-outline-warning'
+  }`}
+  onClick={() =>
+    toggleFav({
+      id: Number(id),
+      name: pkm.name,
+      url: `https://pokeapi.co/api/v2/pokemon/${id}/`,
+      type: 'pokemon'
+    })
+  }
 >
-  {store.favorites.some(f => f.id === id) ? '★' : '☆'}
+  {store.favorites.some(f => f.id === Number(id) && f.type === 'pokemon') ? '★' : '☆'}
 </button>
           </div>
           <div className="col-md-8">
@@ -139,7 +151,7 @@ export default function PokeDetail() {
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: `${(s.base_stat/255)*100}%` }}
+                          style={{ width: `${(s.base_stat / 255) * 100}%` }}
                         />
                       </div>
                     </div>
@@ -165,7 +177,7 @@ export default function PokeDetail() {
                       {mv}
                     </td>
                   )}
-                  <td className="align-middle text-center" style={{ verticalAlign: 'middle' }}>
+                  <td className="align-middle text-center">
                     <img
                       src={methodIcons[d.move_learn_method.name] || methodIcons.machine}
                       width={24} height={24}
@@ -186,50 +198,48 @@ export default function PokeDetail() {
         </table>
       )}
 
-{tab === 'Encounters' && (
-  <div className="row">
-    {enc.length ? (
-      Object.entries(
-        enc.reduce((acc, e) => {
-          e.version_details.forEach(v => {
-            const game = v.version.name.replace(/-/g, ' ');
-            if (!acc[game]) acc[game] = [];
-            acc[game].push({
-              name: e.location_area.name.replace(/-/g, ' '),
-              url: e.location_area.url
-            });
-          });
-          return acc;
-        }, {})
-      ).map(([game, areas]) => (
-        <div key={game} className="col-12 mb-3">
-          <h6 className="mb-2">
-            <strong className="text-capitalize">{game}</strong>
-          </h6>
-          <ul className="list-group">
-            {areas.map((a, i) => {
-              const areaId = a.url.match(/\/(\d+)\/?$/)?.[1];
-              return (
-                <li
-                  key={`${game}-${i}`}
-                  className="list-group-item text-capitalize clickable"
-                  onClick={() => navigate(`/area/${areaId}`)}
-                  role="button"
-                >
-                  {a.name}
-                </li>
-              );
-            })}
-          </ul>
+      {tab === 'Encounters' && (
+        <div className="row">
+          {enc.length ? (
+            Object.entries(
+              enc.reduce((acc, e) => {
+                e.version_details.forEach(v => {
+                  const game = v.version.name.replace(/-/g, ' ')
+                  if (!acc[game]) acc[game] = []
+                  acc[game].push({
+                    name: e.location_area.name.replace(/-/g, ' '),
+                    url: e.location_area.url
+                  })
+                })
+                return acc
+              }, {})
+            ).map(([game, areas]) => (
+              <div key={game} className="col-12 mb-3">
+                <h6 className="mb-2">
+                  <strong className="text-capitalize">{game}</strong>
+                </h6>
+                <ul className="list-group">
+                  {areas.map((a, i) => {
+                    const areaId = a.url.match(/\/(\d+)\/?$/)?.[1]
+                    return (
+                      <li
+                        key={`${game}-${i}`}
+                        className="list-group-item text-capitalize clickable"
+                        onClick={() => navigate(`/area/${areaId}`)}
+                        role="button"
+                      >
+                        {a.name}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            ))
+          ) : (
+            <p>No encounters.</p>
+          )}
         </div>
-      ))
-    ) : (
-      <p>No encounters.</p>
-    )}
-  </div>
-)}
-
-
+      )}
 
       {tab === 'Evolution' && (
         <div className="d-flex flex-wrap">
