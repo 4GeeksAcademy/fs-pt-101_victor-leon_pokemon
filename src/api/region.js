@@ -13,7 +13,6 @@ export const regionImages = {
   10: 'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/a1/latest/20220803152242/Paldea.jpg/2000px-Paldea.jpg',
 };
 
-// NUEVA FUNCIÓN: devuelve la ruta local a una imagen PNG en src/assets/img
 export function getRegionNameImage(regionName) {
   const fileName = regionName.toLowerCase().replace(/\s+/g, '') + '.png';
   return `/src/assets/img/${fileName}`;

@@ -10,7 +10,7 @@ export function useRegionList() {
       .then((regions) => setData(regions))
       .catch((error) => {
         console.error('Error fetching regions:', error);
-        setData([]); // fallback vacío en caso de error
+        setData([]);
       })
       .finally(() => setLoading(false));
   }, []);

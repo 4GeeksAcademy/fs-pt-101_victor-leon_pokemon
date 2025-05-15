@@ -17,14 +17,17 @@ export default function ItemList() {
   }
 
   if (error || !data || !data.items) {
-    return <p className="text-center text-danger mt-4">Error cargando objetos.</p>;
+    return <p className="text-center text-danger mt-4">Error loading items</p>;
   }
 
   return (
     <div className="container mt-4">
-      <button onClick={() => navigate(-1)} className="btn btn-outline-secondary mb-4">
-        ← Volver
-      </button>
+      <button
+          onClick={() => navigate(`/items`)}
+          className="btn btn-outline-warning text-black mt-4 mb-2"
+        >
+          Back to Categories
+        </button>
       <h2 className="text-capitalize mb-4 text-center">
         {data.name.replace(/-/g, ' ')}
       </h2>

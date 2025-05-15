@@ -10,12 +10,11 @@ export default function PokeCard({ item }) {
   const toggle = useToggleFavorite();
   const { store } = useStore();
 
-  // Extraer ID desde URL (como string)
   const idMatch = item?.url?.match(/\/(\d+)\/?$/);
   if (!idMatch) return <p className="text-danger">Invalid Pokémon data</p>;
 
-  const id = idMatch[1]; // '25' (string)
-  const idNumber = Number(id); // 25 (número para comparación segura)
+  const id = idMatch[1]; 
+  const idNumber = Number(id);
 
   const isFav = store.favorites.some(f => f.id === idNumber && f.type === 'pokemon');
   const { data: detail } = usePokemonDetail(id);

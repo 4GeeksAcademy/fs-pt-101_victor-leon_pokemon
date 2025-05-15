@@ -16,12 +16,21 @@ export default function Item() {
   }
 
   if (error || !categories) {
-    return <p className="text-center text-danger mt-4">Error cargando categorías.</p>;
+    return <p className="text-center text-danger mt-4">Error loading categories.</p>;
   }
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4 text-center">Item categories</h2>
+      <h2 className="page-title text-center mt-4 mb-4 d-flex align-items-center justify-content-center gap-2">
+        <img
+          src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/fd/latest/20230115173615/Poci%C3%B3n_EP.png/150px-Poci%C3%B3n_EP.png"
+          alt="Item icon"
+          className="pokeball-icon"
+          width="40"
+          height="40"
+        />
+        <span className="text">Item Categories</span>
+      </h2>
       <div className="row">
         {categories.map(cat => {
           const id = getIdFromUrl(cat.url);

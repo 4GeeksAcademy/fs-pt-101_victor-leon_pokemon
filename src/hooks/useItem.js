@@ -5,9 +5,6 @@ import {
   fetchItemDetail
 } from '../api/item';
 
-/**
- * Hook para obtener la lista completa de objetos.
- */
 export function useItems() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,9 +20,6 @@ export function useItems() {
   return { data, loading, error };
 }
 
-/**
- * Hook para obtener todas las categorías de objetos.
- */
 export function useItemCategories() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,9 +35,6 @@ export function useItemCategories() {
   return { data, loading, error };
 }
 
-/**
- * Hook para obtener el detalle de un objeto individual.
- */
 export function useItemDetail(idOrName) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -62,9 +53,6 @@ export function useItemDetail(idOrName) {
   return { data, loading, error };
 }
 
-/**
- * Hook para obtener los objetos de una categoría específica.
- */
 export function useItemCategory(idOrName) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
